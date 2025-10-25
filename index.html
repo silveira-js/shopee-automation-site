@@ -5,91 +5,458 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Afflo — Intelligent Affiliate Automation</title>
   <meta name="description" content="Afflo automates video sourcing, affiliate link generation, cross-posting, and analytics for high-velocity affiliate workflows." />
+
+  <!-- Favicon -->
   <link rel="icon" href="favicon.svg" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root { 
-      --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; 
-      --accent:#22d3ee; --accent-dark:#06b6d4; --border:rgba(255,255,255,.08); --border-hover:rgba(255,255,255,.12);
-      --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
-      --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Afflo — Intelligent Affiliate Automation" />
+  <meta property="og:description" content="Automate video sourcing, affiliate links and cross-posting with analytics." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.sua-url.com/assets/logo/afflo-wordmark.png" />
+  <meta property="og:url" content="https://www.sua-url.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Afflo — Intelligent Affiliate Automation" />
+  <meta name="twitter:description" content="Automate video sourcing, affiliate links and cross-posting with analytics." />
+  <meta name="twitter:image" content="https://www.sua-url.com/assets/logo/afflo-wordmark.png" />
+
+    <style>
+      :root { 
+       --bg:#0a0e1a; 
+       --text:#e5e7eb; 
+       --text-bright:#f9fafb;
+       --muted:#94a3b8; 
+       --accent:#22d3ee; 
+       --accent-dark:#06b6d4; 
+       --accent-glow:rgba(34,211,238,0.15);
+       --border:rgba(255,255,255,.06); 
+       --border-hover:rgba(34,211,238,.2);
+       --card-bg:rgba(15,23,42,0.6);
+       --card-border:rgba(255,255,255,.08);
+     }
+     
+     *{box-sizing:border-box; margin:0; padding:0}
+     
+     body{
+       margin:0; 
+       font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       background:
+         radial-gradient(ellipse 1400px 900px at 85% -5%, rgba(14,165,233,0.15) 0%, transparent 45%),
+         radial-gradient(ellipse 1000px 700px at 15% 95%, rgba(34,211,238,0.1) 0%, transparent 40%),
+         radial-gradient(circle 800px at 50% 50%, rgba(99,102,241,0.03) 0%, transparent 50%),
+         linear-gradient(180deg, #0a0e1a 0%, #0f172a 100%);
+       color:var(--text); 
+       line-height:1.6; 
+       font-size:16px; 
+       min-height:100vh;
+       -webkit-font-smoothing:antialiased;
+       -moz-osx-font-smoothing:grayscale;
+     }
+     
+     .wrap{max-width:1200px; margin:0 auto; padding:0 24px}
+     
+     /* Header */
+     header{
+       position:sticky;
+       top:0;
+       z-index:100;
+       backdrop-filter:blur(16px) saturate(180%);
+       -webkit-backdrop-filter:blur(16px) saturate(180%);
+       background:linear-gradient(180deg, rgba(10,14,26,0.8) 0%, rgba(10,14,26,0.7) 100%);
+       border-bottom:1px solid rgba(255,255,255,0.05);
+     }
+     
+     .header-content{
+       max-width:1200px;
+       margin:0 auto;
+       padding:28px 24px;
+       display:flex; 
+       align-items:center; 
+       justify-content:space-between; 
+       gap:24px;
+     }
+     
+     .brand{
+       display:flex; 
+       align-items:center; 
+       gap:12px; 
+       text-decoration:none; 
+       color:var(--text);
+       transition:opacity 0.3s ease;
+     }
+     
+     .brand:hover{opacity:0.85}
+     
+     /* Logo */
+     .logo {
+       height:42px;
+       width:auto;
+       filter:
+         drop-shadow(0 0 20px rgba(34,211,238,0.25))
+         drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+       transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+     }
+     
+     .logo:hover {
+       filter:
+         drop-shadow(0 0 28px rgba(34,211,238,0.4))
+         drop-shadow(0 6px 16px rgba(0,0,0,0.4));
+       transform:translateY(-2px);
+     }
+     
+    /* CTA Button */
+    .cta{
+      position:relative;
+      display:inline-block; 
+      padding:14px 28px; 
+      border-radius:12px;
+      background:linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+      color:#0a0e1a;
+      text-decoration:none; 
+      font-weight:500; 
+      font-size:15px;
+      box-shadow:
+        0 4px 14px rgba(34,211,238,0.3),
+        0 1px 3px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow:hidden;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background: radial-gradient(1200px 800px at 80% -10%, #0ea5e9 0, transparent 40%), 
-                  radial-gradient(800px 600px at 20% 100%, #22d3ee 0, transparent 30%), var(--bg);
-      color:var(--text); line-height:1.6; font-size:16px; min-height:100vh;
+     
+     .cta::before{
+       content:'';
+       position:absolute;
+       top:0; left:0; right:0; bottom:0;
+       background:linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+       opacity:0;
+       transition:opacity 0.3s ease;
+     }
+     
+     .cta:hover{
+       transform:translateY(-2px);
+       box-shadow:
+         0 8px 24px rgba(34,211,238,0.4),
+         0 4px 8px rgba(0,0,0,0.3),
+         inset 0 1px 0 rgba(255,255,255,0.3);
+     }
+     
+     .cta:hover::before{opacity:1}
+     
+     .cta:active{transform:translateY(0px)}
+     
+    /* Hero Section */
+    .hero{
+      margin:100px 0 80px;
     }
-    .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
-    header{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px 0; border-bottom:1px solid var(--border)}
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
-    .logo{width:44px; height:44px}
-    .brand-title{font-weight:800; font-size:22px; letter-spacing:-.02em}
-    .cta{display:inline-block; padding:12px 24px; border-radius:12px; background:linear-gradient(135deg,#22d3ee,#06b6d4); color:#0b1220; text-decoration:none; font-weight:700; font-size:14px; box-shadow:var(--shadow)}
-    .hero{margin:80px 0; display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:start}
-    .hero h1{font-size:clamp(32px,5vw,56px); font-weight:800; line-height:1.1; margin:0 0 16px}
-    .hero p{font-size:18px; color:var(--muted)}
-    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px}
-    .kpi{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:16px; padding:20px; text-align:center}
-    .kpi b{display:block; font-size:24px; color:var(--accent)}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:20px; padding:32px; box-shadow:var(--shadow)}
-    .card h3{margin:0 0 12px; font-size:20px}
-    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:64px 0}
-    footer{margin:80px 0 24px; padding:32px 0; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:14px}
-    footer a{color:var(--accent); text-decoration:none}
-    @media(max-width:1024px){ .hero{grid-template-columns:1fr} .features{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:640px){ .kpis{grid-template-columns:1fr} header{flex-direction:column; gap:12px} footer{flex-direction:column; gap:12px}}
-  </style>
+    
+    .hero-content{
+      max-width:900px;
+      margin:0 auto 56px;
+      text-align:center;
+    }
+    
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:32px;
+      align-items:start;
+    }
+     
+    .hero h1{
+      font-size:clamp(36px, 5.5vw, 64px); 
+      font-weight:300; 
+      line-height:1.15; 
+      margin:0 0 24px;
+      padding:4px 0;
+      color:var(--text-bright);
+      letter-spacing:-0.03em;
+      background:linear-gradient(135deg, #f9fafb 0%, #94a3b8 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+     
+     .hero p{
+       font-size:19px; 
+       color:var(--muted);
+       line-height:1.7;
+       margin-bottom:16px;
+     }
+     
+    /* KPIs */
+    .kpis-container{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+    
+    .kpis{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      height:100%;
+      justify-content:center;
+    }
+     
+    .kpi{
+      background:linear-gradient(135deg, rgba(34,211,238,0.05) 0%, rgba(99,102,241,0.02) 100%);
+      border:1px solid var(--card-border);
+      border-radius:16px; 
+      padding:28px; 
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+     
+     .kpi::before{
+       content:'';
+       position:absolute;
+       top:0; left:0; right:0;
+       height:1px;
+       background:linear-gradient(90deg, transparent, var(--accent), transparent);
+       opacity:0;
+       transition:opacity 0.3s ease;
+     }
+     
+     .kpi:hover{
+       transform:translateY(-4px);
+       border-color:var(--border-hover);
+       background:linear-gradient(135deg, rgba(34,211,238,0.08) 0%, rgba(99,102,241,0.04) 100%);
+       box-shadow:
+         0 12px 28px rgba(34,211,238,0.15),
+         0 4px 12px rgba(0,0,0,0.2);
+     }
+     
+     .kpi:hover::before{opacity:1}
+     
+    .kpi b{
+      display:block; 
+      font-size:32px; 
+      font-weight:500;
+      color:var(--accent);
+      margin-bottom:8px;
+      text-shadow:0 0 20px var(--accent-glow);
+    }
+    
+    .kpi small{
+      font-size:14px;
+      color:var(--muted);
+      font-weight:300;
+    }
+     
+     /* Cards */
+     .card{
+       background:var(--card-bg);
+       backdrop-filter:blur(12px);
+       border:1px solid var(--card-border);
+       border-radius:24px; 
+       padding:36px;
+       position:relative;
+       overflow:hidden;
+       transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+       box-shadow:
+         0 4px 12px rgba(0,0,0,0.1),
+         inset 0 1px 0 rgba(255,255,255,0.05);
+     }
+     
+     .card::before{
+       content:'';
+       position:absolute;
+       top:0; left:0; right:0;
+       height:1px;
+       background:linear-gradient(90deg, transparent, rgba(34,211,238,0.5), transparent);
+       opacity:0;
+       transition:opacity 0.3s ease;
+     }
+     
+     .card:hover{
+       transform:translateY(-4px);
+       border-color:var(--border-hover);
+       box-shadow:
+         0 12px 32px rgba(34,211,238,0.12),
+         0 4px 16px rgba(0,0,0,0.2),
+         inset 0 1px 0 rgba(255,255,255,0.08);
+     }
+     
+     .card:hover::before{opacity:1}
+     
+    .card h3{
+      margin:0 0 16px; 
+      font-size:22px;
+      font-weight:500;
+      color:var(--text-bright);
+    }
+     
+     .card p{
+       color:var(--muted);
+       line-height:1.7;
+       margin-bottom:12px;
+     }
+     
+     .card ul{
+       list-style:none;
+       padding:0;
+       margin:16px 0;
+     }
+     
+    .card li{
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+      transition:color 0.2s ease;
+    }
+    
+    .card li:last-child{border-bottom:none}
+    
+    .card li:hover{color:var(--text)}
+    
+    .card li strong{
+      color:var(--text-bright);
+      font-weight:500;
+    }
+     
+    .card code{
+      background:rgba(34,211,238,0.1);
+      color:var(--accent);
+      padding:3px 10px;
+      border-radius:6px;
+      font-size:14px;
+      font-family:'SF Mono', Monaco, 'Cascadia Code', monospace;
+      font-weight:400;
+      border:1px solid rgba(34,211,238,0.2);
+    }
+     
+     /* Features Grid */
+     .features{
+       display:grid; 
+       grid-template-columns:repeat(3, 1fr); 
+       gap:28px; 
+       margin:80px 0;
+     }
+     
+     .features .card p{font-size:15px}
+     
+     /* Footer */
+     footer{
+       margin:100px 0 32px; 
+       padding:36px 0; 
+       border-top:1px solid var(--border);
+       display:flex; 
+       justify-content:space-between; 
+       align-items:center; 
+       color:var(--muted); 
+       font-size:14px;
+     }
+     
+     footer a{
+       color:var(--accent); 
+       text-decoration:none;
+       transition:color 0.2s ease;
+     }
+     
+     footer a:hover{
+       color:var(--text-bright);
+       text-shadow:0 0 12px var(--accent-glow);
+     }
+     
+    /* Responsive */
+    @media(max-width:1024px){
+      .hero-grid{grid-template-columns:1fr; gap:32px}
+      .features{grid-template-columns:1fr; gap:24px}
+    }
+     
+    @media(max-width:640px){
+      .wrap{padding:0 20px}
+      .header-content{padding:20px; flex-direction:column; gap:16px}
+      .hero{margin:60px 0 60px}
+      footer{flex-direction:column; gap:16px; text-align:center}
+      .features{margin:60px 0}
+    }
+     
+     /* Smooth animations */
+     @media(prefers-reduced-motion:no-preference){
+       html{scroll-behavior:smooth}
+     }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="#">
-        <img class="logo" src="afflo-symbol.svg" alt="Afflo logo" />
-        <div class="brand-title">Afflo</div>
+  <header aria-label="Site header">
+    <div class="header-content">
+      <a class="brand" href="/" aria-label="Afflo — Home">
+        <!-- Use <picture> para WebP fallback -->
+         <picture>
+           <source srcset="assets/logo/afflo-wordmark.webp" type="image/webp">
+           <img
+             class="logo"
+             src="assets/logo/afflo-wordmark.png"
+             srcset="assets/logo/afflo-wordmark.png 1x, assets/logo/afflo-wordmark@2x.png 2x"
+             alt="afflo"
+             decoding="async"
+             loading="eager"
+           />
+         </picture>
       </a>
       <a class="cta" href="mailto:contact@afflo.com">Contact</a>
-    </header>
+    </div>
+  </header>
+  
+  <div class="wrap">
 
     <section class="hero">
-      <div>
+      <div class="hero-content">
         <h1>Intelligent Affiliate Automation</h1>
-        <p>Automate video sourcing from Telegram/WhatsApp, deduplicate with perceptual hashing, generate affiliate links, and cross‑post to Instagram, TikTok, Kwai, and YouTube Shorts — all with optimized scheduling.</p>
-        <div class="kpis">
-          <div class="kpi"><b>90+/day</b><small>Automated posts</small></div>
-          <div class="kpi"><b>CTR ↑</b><small>AI captions & timing</small></div>
-          <div class="kpi"><b>ROI</b><small>Click → Conversion tracking</small></div>
+        <p>Automate video sourcing from Telegram/WhatsApp, deduplicate with perceptual hashing, generate affiliate links, and cross-post to Instagram, TikTok, Kwai, and YouTube Shorts — all with optimized scheduling.</p>
+      </div>
+      
+      <div class="hero-grid">
+        <div class="kpis-container">
+          <div class="kpis" role="list" aria-label="Key performance indicators">
+            <div class="kpi" role="listitem"><b>90+/day</b><small>Automated posts</small></div>
+            <div class="kpi" role="listitem"><b>CTR ↑</b><small>AI captions & timing</small></div>
+            <div class="kpi" role="listitem"><b>ROI</b><small>Click → Conversion tracking</small></div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>🚀 Why Choose Afflo?</h3>
+          <p>Transform hours of manual work into minutes. Here's what you get:</p>
+          <ul>
+            <li><strong>Zero Manual Posting</strong> — Fully automated content pipeline</li>
+            <li><strong>Smart Deduplication</strong> — Never post the same video twice</li>
+            <li><strong>Revenue Tracking</strong> — See exactly what converts</li>
+            <li><strong>Multi-Platform</strong> — Instagram, TikTok, Kwai, YouTube Shorts</li>
+            <li><strong>AI-Powered</strong> — Optimized captions, hashtags & timing</li>
+          </ul>
+          <p style="margin-top:20px"><a class="cta" href="mailto:contact@afflo.com">Request Access</a></p>
         </div>
       </div>
-      <div class="card">
-        <h3>🚀 Live Demo Endpoints</h3>
-        <p>Public endpoints (mock) you can wire later:</p>
-        <ul>
-          <li><code>/health</code> — System status</li>
-          <li><code>/docs</code> — API documentation</li>
-          <li><code>/metrics</code> — Performance data</li>
-        </ul>
-        <p style="margin-top:20px"><a class="cta" href="mailto:contact@afflo.com">Request Access</a></p>
-      </div>
     </section>
 
     <section class="features">
-      <div class="card"><h3>📥 Smart Video Ingestion</h3><p>Fetch from Telegram channels and WhatsApp groups; normalize to 1080×1920 H.264; dedupe via perceptual hash.</p></div>
-      <div class="card"><h3>🔗 Affiliate Links</h3><p>Generate Shopee deep‑links with <code>sub_id</code> to tie posts to conversions.</p></div>
-      <div class="card"><h3>📱 Cross‑posting</h3><p>Schedule and publish to Instagram, TikTok, Kwai, and YouTube Shorts.</p></div>
+      <div class="card"><h3>📥 Find Winning Content Effortlessly</h3><p>Connect your Telegram and WhatsApp sources. Our system automatically imports, optimizes, and eliminates duplicate videos — so you always post fresh content.</p></div>
+      <div class="card"><h3>🔗 Track Every Dollar You Earn</h3><p>Generate smart affiliate links that show exactly which posts drive sales. Know your best performers and double down on what works.</p></div>
+      <div class="card"><h3>📱 Reach Millions in Minutes</h3><p>One click publishes your content across Instagram, TikTok, Kwai, and YouTube Shorts. Save hours of manual posting every single day.</p></div>
     </section>
 
     <section class="features">
-      <div class="card"><h3>🤖 AI Optimization</h3><p>AI captions, hashtag selection, and best‑time scheduling.</p></div>
-      <div class="card"><h3>📊 Analytics</h3><p>Track clicks, conversions, EPC/ROI; identify top products.</p></div>
-      <div class="card"><h3>⚡ Built for Scale</h3><p>AWS‑native pipeline, retries/backoff, alerting, 99.9% uptime target.</p></div>
+      <div class="card"><h3>🤖 Let AI Maximize Your Results</h3><p>Our AI writes engaging captions, picks trending hashtags, and posts at peak times. Get more views, clicks, and sales while you sleep.</p></div>
+      <div class="card"><h3>📊 Know Exactly What Works</h3><p>See real-time data on clicks, conversions, and revenue. Discover your top-performing products and scale what's making money.</p></div>
+      <div class="card"><h3>⚡ Scale Without Limits</h3><p>Built on enterprise infrastructure that handles 90+ posts per day reliably. As your business grows, our platform grows with you.</p></div>
     </section>
 
     <section class="card" style="text-align:center; margin:64px 0">
-      <h2 style="font-size:32px; font-weight:800; margin:0 0 12px">Ready to scale with Afflo?</h2>
+      <h2 style="font-size:32px; font-weight:400; margin:0 0 12px">Ready to scale with Afflo?</h2>
       <p style="font-size:18px; color:var(--muted); margin:0 0 24px">Launch your automated affiliate workflow today.</p>
       <a class="cta" href="mailto:contact@afflo.com" style="font-size:16px; padding:16px 32px">Get Started</a>
     </section>
