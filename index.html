@@ -3,481 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ViralFlow — AI-Powered Affiliate Marketing Automation</title>
-  <meta name="description" content="Transform your affiliate marketing with AI-powered automation: fetch videos, generate affiliate links, publish to Instagram/TikTok, and track conversions." />
+  <title>Afflo — Intelligent Affiliate Automation</title>
+  <meta name="description" content="Afflo automates video sourcing, affiliate link generation, cross-posting, and analytics for high-velocity affiliate workflows." />
   <link rel="icon" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root { 
-      --bg: #0f172a; 
-      --card: #111827; 
-      --text: #e5e7eb; 
-      --muted: #9ca3af; 
-      --accent: #22d3ee;
-      --accent-dark: #06b6d4;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --border: rgba(255,255,255,.08);
-      --border-hover: rgba(255,255,255,.12);
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; 
+      --accent:#22d3ee; --accent-dark:#06b6d4; --border:rgba(255,255,255,.08); --border-hover:rgba(255,255,255,.12);
+      --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+      --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
     }
-    
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, #0ea5e9 0, transparent 40%), 
+                  radial-gradient(800px 600px at 20% 100%, #22d3ee 0, transparent 30%), var(--bg);
+      color:var(--text); line-height:1.6; font-size:16px; min-height:100vh;
     }
-    
-    body {
-      margin: 0;
-      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background: 
-        radial-gradient(1200px 800px at 80% -10%, #0ea5e9 0, transparent 40%),
-        radial-gradient(800px 600px at 20% 100%, #22d3ee 0, transparent 30%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 16px;
-      font-weight: 400;
-      min-height: 100vh;
-    }
-    
-    .wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Header */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: opacity 0.2s ease;
-    }
-    
-    .brand:hover {
-      opacity: 0.8;
-    }
-    
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #22d3ee, #6366f1);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 18px;
-      box-shadow: var(--shadow);
-    }
-    
-    .brand-title {
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.025em;
-    }
-    
-    .cta {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #22d3ee, #06b6d4);
-      color: #0b1220;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow);
-    }
-    
-    .cta:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    /* Hero Section */
-    .hero {
-      margin: 80px 0;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 48px;
-      align-items: start;
-    }
-    
-    .hero-content h1 {
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 800;
-      line-height: 1.1;
-      margin: 0 0 24px;
-      letter-spacing: -0.025em;
-    }
-    
-    .hero-content p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-    
-    .hero-content .highlight {
-      color: var(--accent);
-      font-weight: 600;
-    }
-    
-    .kpis {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 32px;
-    }
-    
-    .kpi {
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-    
-    .kpi:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-    
-    .kpi b {
-      display: block;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-    
-    .kpi small {
-      font-size: 14px;
-      color: var(--muted);
-    }
-    
-    /* Cards */
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-      transition: all 0.2s ease;
-    }
-    
-    .card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .card h3 {
-      margin: 0 0 16px;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    
-    .card p {
-      line-height: 1.6;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-    
-    .card ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-    
-    .card li {
-      margin-bottom: 8px;
-    }
-    
-    .card code {
-      background: rgba(34, 211, 238, 0.1);
-      color: var(--accent);
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-    }
-    
-    /* Features */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin: 64px 0;
-    }
-    
-    .features .card {
-      text-align: center;
-    }
-    
-    .features .card h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-    
-    .features .card p {
-      font-size: 14px;
-    }
-    
-    /* Footer */
-    footer {
-      margin: 80px 0 24px;
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-    
-    footer a:hover {
-      opacity: 0.8;
-    }
-    
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      
-      .features {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .kpis {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 640px) {
-      .wrap {
-        padding: 0 16px;
-      }
-      
-      header {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-      
-      .hero {
-        margin: 48px 0;
-      }
-      
-      .kpis {
-        grid-template-columns: 1fr;
-      }
-      
-      footer {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .card {
-      animation: fadeInUp 0.6s ease-out;
-    }
-    
-    .card:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-    
-    .card:nth-child(3) {
-      animation-delay: 0.2s;
-    }
-    
-    /* Loading animation */
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
-    }
-    
-    .loading {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    /* Focus states for accessibility */
-    .cta:focus,
-    .brand:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+    .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px 0; border-bottom:1px solid var(--border)}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+    .logo{width:44px; height:44px}
+    .brand-title{font-weight:800; font-size:22px; letter-spacing:-.02em}
+    .cta{display:inline-block; padding:12px 24px; border-radius:12px; background:linear-gradient(135deg,#22d3ee,#06b6d4); color:#0b1220; text-decoration:none; font-weight:700; font-size:14px; box-shadow:var(--shadow)}
+    .hero{margin:80px 0; display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:start}
+    .hero h1{font-size:clamp(32px,5vw,56px); font-weight:800; line-height:1.1; margin:0 0 16px}
+    .hero p{font-size:18px; color:var(--muted)}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px}
+    .kpi{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:16px; padding:20px; text-align:center}
+    .kpi b{display:block; font-size:24px; color:var(--accent)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:20px; padding:32px; box-shadow:var(--shadow)}
+    .card h3{margin:0 0 12px; font-size:20px}
+    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:64px 0}
+    footer{margin:80px 0 24px; padding:32px 0; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:14px}
+    footer a{color:var(--accent); text-decoration:none}
+    @media(max-width:1024px){ .hero{grid-template-columns:1fr} .features{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:640px){ .kpis{grid-template-columns:1fr} header{flex-direction:column; gap:12px} footer{flex-direction:column; gap:12px}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <a class="brand" href="#">
-        <div class="brand-logo">V</div>
-        <div class="brand-title">ViralFlow</div>
+        <img class="logo" src="afflo-symbol.svg" alt="Afflo logo" />
+        <div class="brand-title">Afflo</div>
       </a>
-      <a class="cta" href="mailto:contact@viralflow.ai">Contact</a>
+      <a class="cta" href="mailto:contact@afflo.com">Contact</a>
     </header>
 
     <section class="hero">
-      <div class="hero-content">
-        <h1>AI-Powered Affiliate Marketing Automation</h1>
-        <p>Transform your affiliate marketing with intelligent automation. Ingest videos from Telegram/WhatsApp, deduplicate with perceptual hash, generate affiliate links, and cross-post to Instagram, TikTok, and YouTube Shorts with AI-optimized scheduling.</p>
-        <p>Powered by <span class="highlight">advanced AI technology</span> — Enterprise-grade automation platform</p>
+      <div>
+        <h1>Intelligent Affiliate Automation</h1>
+        <p>Automate video sourcing from Telegram/WhatsApp, deduplicate with perceptual hashing, generate affiliate links, and cross‑post to Instagram, TikTok, Kwai, and YouTube Shorts — all with optimized scheduling.</p>
         <div class="kpis">
-          <div class="kpi">
-            <b>90+</b>
-            <small>Automated posts daily</small>
-          </div>
-          <div class="kpi">
-            <b>CTR ↑</b>
-            <small>AI captions & optimal timing</small>
-          </div>
-          <div class="kpi">
-            <b>ROI</b>
-            <small>Click → Conversion tracking</small>
-          </div>
+          <div class="kpi"><b>90+/day</b><small>Automated posts</small></div>
+          <div class="kpi"><b>CTR ↑</b><small>AI captions & timing</small></div>
+          <div class="kpi"><b>ROI</b><small>Click → Conversion tracking</small></div>
         </div>
       </div>
       <div class="card">
         <h3>🚀 Live Demo Endpoints</h3>
-        <p>Experience the automation in action with our public API endpoints:</p>
+        <p>Public endpoints (mock) you can wire later:</p>
         <ul>
-          <li><code>/health</code> — System status & uptime</li>
-          <li><code>/docs</code> — Interactive API documentation</li>
-          <li><code>/metrics</code> — Real-time performance data</li>
+          <li><code>/health</code> — System status</li>
+          <li><code>/docs</code> — API documentation</li>
+          <li><code>/metrics</code> — Performance data</li>
         </ul>
-        <p style="margin-top: 20px;">
-          <a class="cta" href="#contact">Request Access</a>
-        </p>
+        <p style="margin-top:20px"><a class="cta" href="mailto:contact@afflo.com">Request Access</a></p>
       </div>
     </section>
 
     <section class="features">
-      <div class="card">
-        <h3>📥 Smart Video Ingestion</h3>
-        <p>Automatically fetch videos from Telegram channels and WhatsApp groups. Our system normalizes content to 1080×1920 H.264 format and uses perceptual hashing to eliminate duplicates.</p>
-      </div>
-      <div class="card">
-        <h3>🔗 Intelligent Affiliate Links</h3>
-        <p>Generate Shopee deeplinks with unique <code>sub_id</code> parameters to track conversions and optimize your affiliate performance across all platforms.</p>
-      </div>
-      <div class="card">
-        <h3>📱 Multi-Platform Publishing</h3>
-        <p>Schedule and publish content to Instagram, TikTok, Kwai, and YouTube Shorts with platform-specific optimizations and optimal posting times.</p>
-      </div>
+      <div class="card"><h3>📥 Smart Video Ingestion</h3><p>Fetch from Telegram channels and WhatsApp groups; normalize to 1080×1920 H.264; dedupe via perceptual hash.</p></div>
+      <div class="card"><h3>🔗 Affiliate Links</h3><p>Generate Shopee deep‑links with <code>sub_id</code> to tie posts to conversions.</p></div>
+      <div class="card"><h3>📱 Cross‑posting</h3><p>Schedule and publish to Instagram, TikTok, Kwai, and YouTube Shorts.</p></div>
     </section>
 
     <section class="features">
-      <div class="card">
-        <h3>🤖 AI-Powered Optimization</h3>
-        <p>Leverage machine learning to generate engaging captions, optimize posting times, and maximize engagement rates across all social platforms.</p>
-      </div>
-      <div class="card">
-        <h3>📊 Advanced Analytics</h3>
-        <p>Track clicks, conversions, and ROI with detailed analytics dashboard. Monitor performance across all platforms and optimize your strategy in real-time.</p>
-      </div>
-      <div class="card">
-        <h3>⚡ Enterprise Ready</h3>
-        <p>Built on AWS infrastructure with auto-scaling, 99.9% uptime guarantee, and enterprise-grade security. Handle thousands of posts daily with ease.</p>
-      </div>
+      <div class="card"><h3>🤖 AI Optimization</h3><p>AI captions, hashtag selection, and best‑time scheduling.</p></div>
+      <div class="card"><h3>📊 Analytics</h3><p>Track clicks, conversions, EPC/ROI; identify top products.</p></div>
+      <div class="card"><h3>⚡ Built for Scale</h3><p>AWS‑native pipeline, retries/backoff, alerting, 99.9% uptime target.</p></div>
     </section>
 
-    <section class="card" style="text-align: center; margin: 64px 0;">
-      <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 16px; color: var(--text);">Ready to Scale Your Affiliate Marketing?</h2>
-      <p style="font-size: 18px; color: var(--muted); margin-bottom: 32px;">Join the automation revolution and start generating consistent revenue with minimal effort.</p>
-      <a class="cta" href="mailto:contact@viralflow.ai" style="font-size: 16px; padding: 16px 32px;">Get Started Today</a>
+    <section class="card" style="text-align:center; margin:64px 0">
+      <h2 style="font-size:32px; font-weight:800; margin:0 0 12px">Ready to scale with Afflo?</h2>
+      <p style="font-size:18px; color:var(--muted); margin:0 0 24px">Launch your automated affiliate workflow today.</p>
+      <a class="cta" href="mailto:contact@afflo.com" style="font-size:16px; padding:16px 32px">Get Started</a>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> ViralFlow — All rights reserved.</div>
-      <div id="contact">Contact: <a href="mailto:contact@viralflow.ai">contact@viralflow.ai</a></div>
+      <div>© <span id="year"></span> Afflo — All rights reserved.</div>
+      <div>Contact: <a href="mailto:contact@afflo.com">contact@afflo.com</a></div>
     </footer>
   </div>
-  <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Add loading animation to cards on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-    
-    // Observe all cards
-    document.querySelectorAll('.card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
-    
-    // Add smooth hover effects to KPIs
-    document.querySelectorAll('.kpi').forEach(kpi => {
-      kpi.addEventListener('mouseenter', () => {
-        kpi.style.transform = 'translateY(-4px) scale(1.02)';
-      });
-      
-      kpi.addEventListener('mouseleave', () => {
-        kpi.style.transform = 'translateY(0) scale(1)';
-      });
-    });
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
 </body>
 </html>
