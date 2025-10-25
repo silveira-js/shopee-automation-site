@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopee Automation — Affiliate Video Posting</title>
+  <meta name="description" content="Automated affiliate marketing for Shopee: fetch videos, generate affiliate links, publish to Instagram/TikTok, and track conversions." />
+  <link rel="icon" href="favicon.svg" />
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22d3ee; }
+    *{box-sizing:border-box}
+    body{margin:0; font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial; background:radial-gradient(1200px 800px at 80% -10%, #0ea5e9 0, transparent 40%), var(--bg); color:var(--text)}
+    .wrap{max-width:980px; margin:0 auto; padding:48px 20px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
+    .brand-logo{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#22d3ee,#6366f1); display:grid; place-items:center; font-weight:800}
+    .brand-title{font-weight:700; letter-spacing:.2px}
+    .cta{display:inline-block; padding:12px 18px; border-radius:12px; background:linear-gradient(135deg,#22d3ee,#06b6d4); color:#0b1220; text-decoration:none; font-weight:700}
+    .hero{margin:64px 0; display:grid; grid-template-columns:1.2fr .8fr; gap:28px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px}
+    h1{font-size: clamp(28px, 5vw, 48px); margin:0 0 12px}
+    p{line-height:1.6; color:var(--muted)}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px}
+    .kpi{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:14px}
+    .kpi b{font-size:20px; color:var(--accent)}
+    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+    .features h3{margin:0 0 8px; font-size:18px}
+    footer{margin:48px 0 12px; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:14px}
+    @media (max-width:900px){ .hero{grid-template-columns:1fr} .features{grid-template-columns:1fr} .kpis{grid-template-columns:1fr 1fr} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#">
+        <div class="brand-logo">S</div>
+        <div class="brand-title">Shopee Automation</div>
+      </a>
+      <a class="cta" href="mailto:you@example.com">Contact</a>
+    </header>
+
+    <section class="hero card">
+      <div>
+        <h1>Automate affiliate video posting for Shopee</h1>
+        <p>Ingest videos from Telegram/WhatsApp, deduplicate with perceptual hash, generate affiliate links, post to Instagram/TikTok/Kwai/Shorts, and track clicks & conversions on a simple dashboard.</p>
+        <p><b>Built by: Josué Silveira</b></p>
+        <div class="kpis">
+          <div class="kpi"><b>90+/day</b><br/>Automated posts</div>
+          <div class="kpi"><b>CTR&nbsp;↑</b><br/>AI captions & timing</div>
+          <div class="kpi"><b>ROI</b><br/>Click → Conversion tracking</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Live endpoints (Demo)</h3>
+        <p>Public demo endpoints can go here when ready (e.g., healthcheck, docs).</p>
+        <ul>
+          <li><code>/health</code></li>
+          <li><code>/docs</code></li>
+        </ul>
+        <p style="margin-top:12px;"><a class="cta" href="#contact">Request access</a></p>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="card">
+        <h3>Video ingestion</h3>
+        <p>Fetch from Telegram channels; normalize to 1080×1920 H.264; pHash dedupe.</p>
+      </div>
+      <div class="card">
+        <h3>Affiliate links</h3>
+        <p>Generate Shopee deeplinks with <code>sub_id</code> to tie posts to conversions.</p>
+      </div>
+      <div class="card">
+        <h3>Cross‑posting</h3>
+        <p>Schedule and publish to Instagram, TikTok, Kwai, and YouTube Shorts.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Shopee Automation — All rights reserved.</div>
+      <div id="contact">Contact: <a href="mailto:you@example.com">you@example.com</a></div>
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+</body>
+</html>
